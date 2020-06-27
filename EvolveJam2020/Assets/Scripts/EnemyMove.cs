@@ -22,5 +22,6 @@ public class EnemyMove : MonoBehaviour
     void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position, targetPlayer.position, speed * Time.deltaTime);
+        mySP.flipX = (targetPlayer.position.x > transform.position.x);
     }
 }
