@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    private GameManager gm;
 
+    [SerializeField]
     private int myType; // not using enums right now, can do it later
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameObject.GetComponent<SpriteRenderer>().color = GameManager.instance.pickupColors[myType];
     }
 
     // Update is called once per frame
@@ -24,7 +24,9 @@ public class Pickup : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            gm.instance.StorePickups(myType);
+            Debug.Log("Hit");
+            GameManager.instance.StorePickups(myType);
+            Destroy(gameObject);
         }
     }
 }
