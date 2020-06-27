@@ -48,6 +48,8 @@ public class PlayerMove : MonoBehaviour
         controls.Player2.Ability2.performed += ctx => UseAbility(2);
         controls.Player2.Ability3.performed += ctx => UseAbility(3);
         controls.Player2.Ability4.performed += ctx => UseAbility(4);
+
+        controls.Player1.Evolve.performed += ctx => Evolve();
     }
 
     private void OnDisable()
@@ -63,9 +65,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     private void Move()
-    {
-        
-
+    {        
         if (myType == PlayerType.Player1)
         {
             movementInput = controls.Player1.Move.ReadValue<Vector2>();
@@ -87,5 +87,9 @@ public class PlayerMove : MonoBehaviour
         Debug.Log($"You used ability number {abilityType}");
     }
 
+    private void Evolve()
+    {
+        Debug.Log("You evolved!");
+    }
     
 }

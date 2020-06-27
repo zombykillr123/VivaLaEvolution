@@ -15,6 +15,11 @@ public class Pickup : MonoBehaviour
 
     private GameObject timerObject;
 
+    /// <summary>
+    /// Are we getting picked up currently?
+    /// </summary>
+    private bool pickingUp; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +43,7 @@ public class Pickup : MonoBehaviour
                 // Start counting down
                 currentTime = timerDefault;
                 timerObject.SetActive(true);
+                pickingUp = true;
                 StartCoroutine(TimerToPickup());
                 break;
             case "Enemy":
@@ -52,6 +58,7 @@ public class Pickup : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             // Resest timer stats
+            pickingUp = false;
             StopCoroutine(TimerToPickup());
             timerObject.SetActive(false);
         }
@@ -59,13 +66,17 @@ public class Pickup : MonoBehaviour
 
     IEnumerator TimerToPickup()
     {
-        while (currentTime > 0)
+        while (currentTime > 0 && pickingUp)
         {
             currentTime -= Time.deltaTime;
+            if (currentTime <= 0)
+            {
+                // When timer is 0, destroy it
+                GameManager.instance.LosePickup(myType, false);
+                Destroy(gameObject);
+            }
             yield return null;
         }
-        // When timer is 0, destroy it
-        GameManager.instance.LosePickup(myType, false);
-        Destroy(gameObject);
+        
     }
 }
