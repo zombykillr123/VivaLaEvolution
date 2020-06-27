@@ -57,6 +57,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Evolve"",
+                    ""type"": ""Button"",
+                    ""id"": ""7bb6ca7e-c38d-43b3-9858-28f0ce78ec07"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -156,6 +164,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Ability4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59025e8b-524a-480e-8710-7168cd5503a3"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Evolve"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -318,6 +337,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Player1_Ability2 = m_Player1.FindAction("Ability2", throwIfNotFound: true);
         m_Player1_Ability3 = m_Player1.FindAction("Ability3", throwIfNotFound: true);
         m_Player1_Ability4 = m_Player1.FindAction("Ability4", throwIfNotFound: true);
+        m_Player1_Evolve = m_Player1.FindAction("Evolve", throwIfNotFound: true);
         // Player2
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Move = m_Player2.FindAction("Move", throwIfNotFound: true);
@@ -379,6 +399,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player1_Ability2;
     private readonly InputAction m_Player1_Ability3;
     private readonly InputAction m_Player1_Ability4;
+    private readonly InputAction m_Player1_Evolve;
     public struct Player1Actions
     {
         private @PlayerControls m_Wrapper;
@@ -388,6 +409,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Ability2 => m_Wrapper.m_Player1_Ability2;
         public InputAction @Ability3 => m_Wrapper.m_Player1_Ability3;
         public InputAction @Ability4 => m_Wrapper.m_Player1_Ability4;
+        public InputAction @Evolve => m_Wrapper.m_Player1_Evolve;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -412,6 +434,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Ability4.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAbility4;
                 @Ability4.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAbility4;
                 @Ability4.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAbility4;
+                @Evolve.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnEvolve;
+                @Evolve.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnEvolve;
+                @Evolve.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnEvolve;
             }
             m_Wrapper.m_Player1ActionsCallbackInterface = instance;
             if (instance != null)
@@ -431,6 +456,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Ability4.started += instance.OnAbility4;
                 @Ability4.performed += instance.OnAbility4;
                 @Ability4.canceled += instance.OnAbility4;
+                @Evolve.started += instance.OnEvolve;
+                @Evolve.performed += instance.OnEvolve;
+                @Evolve.canceled += instance.OnEvolve;
             }
         }
     }
@@ -507,6 +535,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnAbility2(InputAction.CallbackContext context);
         void OnAbility3(InputAction.CallbackContext context);
         void OnAbility4(InputAction.CallbackContext context);
+        void OnEvolve(InputAction.CallbackContext context);
     }
     public interface IPlayer2Actions
     {

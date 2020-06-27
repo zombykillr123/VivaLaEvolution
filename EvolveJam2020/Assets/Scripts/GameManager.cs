@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public Color[] pickupColors;
 
+    /// <summary>
+    /// All pickups in the level
+    /// </summary>
+    public GameObject[] allPickups;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -47,15 +52,18 @@ public class GameManager : MonoBehaviour
     /// Addps pickups you grab to the list
     /// </summary>
     /// <param name="pickupType">The pickups number</param>
-    public void StorePickups(int pickupType)
+    public void LosePickup(int pickupType, bool destroyed)
     {
-        // Store the owned ones, increment a counter
-        ownedPickups.Add(pickupType);
+        if (!destroyed)
+        {
+            // Store the owned ones, increment a counter
+            ownedPickups.Add(pickupType);
+        }
         remainingPickups--;
         if (remainingPickups <= 0)
         {
             // End the level
-            Debug.Log("This is when the level ends");
+            Debug.Log("This is when the level ends maybe idk");
         }
     }
 
@@ -65,6 +73,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void StartLevel()
     {
-        remainingPickups = GameObject.FindGameObjectsWithTag("pickup").Length;
+        allPickups = GameObject.FindGameObjectsWithTag("pickup");
+        remainingPickups = allPickups.Length;
     }
 }
