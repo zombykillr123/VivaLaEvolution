@@ -15,7 +15,10 @@ public class PlayerMove : MonoBehaviour
     private PlayerType myType;
 
     [SerializeField]
-    private float speed;
+    private float speed = 3;
+
+    [SerializeField]
+    Vector2 movementInput = new Vector2();
 
     private PlayerControls controls = null;
 
@@ -57,11 +60,11 @@ public class PlayerMove : MonoBehaviour
 
     private void Move()
     {
-        Vector2 movementInput = new Vector2();
+        
 
         if (myType == PlayerType.Player1)
         {
-            movementInput = controls.Player1.Move.ReadValue<Vector2>();            
+            movementInput = controls.Player1.Move.ReadValue<Vector2>();
         }
         else if (myType == PlayerType.Player2)
         {
