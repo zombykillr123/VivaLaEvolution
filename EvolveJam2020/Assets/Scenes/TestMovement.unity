@@ -131,8 +131,9 @@ GameObject:
   m_Component:
   - component: {fileID: 399305693}
   - component: {fileID: 399305692}
+  - component: {fileID: 399305694}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: LittleGuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,42 +198,33 @@ Transform:
   m_GameObject: {fileID: 399305691}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.1, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1815333683 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 646591375825396752, guid: 948b13ea123acfe48ad4c1ea0c910af6,
-    type: 3}
-  m_PrefabInstance: {fileID: 646591376003080164}
+--- !u!58 &399305694
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399305691}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1
 --- !u!4 &1815333686 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 646591375825396755, guid: 948b13ea123acfe48ad4c1ea0c910af6,
     type: 3}
   m_PrefabInstance: {fileID: 646591376003080164}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1815333687
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1815333683}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dff638ac74c374f07846aaf08e450300, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2136470547
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,32 +440,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
-    - target: {fileID: 646591375825396753, guid: 948b13ea123acfe48ad4c1ea0c910af6,
-        type: 3}
-      propertyPath: myType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 646591375825396754, guid: 948b13ea123acfe48ad4c1ea0c910af6,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 646591375825396754, guid: 948b13ea123acfe48ad4c1ea0c910af6,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 646591375825396754, guid: 948b13ea123acfe48ad4c1ea0c910af6,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 646591375825396754, guid: 948b13ea123acfe48ad4c1ea0c910af6,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 4334783836991956000, guid: 607f108f80a14514c88a79cac3c13389,
-        type: 3}
     - target: {fileID: 646591375825396755, guid: 948b13ea123acfe48ad4c1ea0c910af6,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Genome : MonoBehaviour
 {
 
-    // Trait Class simply corresponds to the loot pool for each of our creature types. ( for example, red genome pool = b, blue genome pool = b ect... )
+    // Trait Class simply corresponds to the loot pool for each of our creature types. ( for example, red genome pool = r, blue genome pool = b ect... )
     public char traitClass;
     public int gen;
 

@@ -78,26 +78,5 @@ public class PlayerMove : MonoBehaviour
         Debug.Log($"You used ability number {abilityType}");
     }
 
-#if false
-        if (myType == PlayerType.Player1)
-        {
-            for (int i = 0; i < p1Abilities.Length; i++)
-            {
-                if (Input.GetKeyDown(p1Abilities[i]))
-                {
-                    UseAbility(i);
-                }
-            }
-        }
-        else if (myType == PlayerType.Player2)
-        {
-            for (int i = 0; i < p2Abilities.Length; i++)
-            {
-                if (Input.GetKeyDown(p2Abilities[i]))
-                {
-                    UseAbility(i);
-                }
-            }
-        }
-#endif
+    
 }
