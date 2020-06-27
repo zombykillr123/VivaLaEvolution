@@ -66,6 +66,10 @@ public class PlayerMove : MonoBehaviour
         }
 
         transform.Translate(movementInput * speed * Time.deltaTime);
+        if (movementInput.x < 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
     }
 
     private void UseAbility(int abilityType)
