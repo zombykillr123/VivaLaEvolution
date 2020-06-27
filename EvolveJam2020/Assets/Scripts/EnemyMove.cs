@@ -10,10 +10,12 @@ public class EnemyMove : MonoBehaviour
     [SerializeField]
     private float speed;
 
+    private SpriteRenderer mySP;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        mySP = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
