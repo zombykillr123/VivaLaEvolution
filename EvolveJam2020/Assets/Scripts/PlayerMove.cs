@@ -19,9 +19,12 @@ public class PlayerMove : MonoBehaviour
 
     private PlayerControls controls = null;
 
+    private SpriteRenderer mySP;
+
     private void Awake()
     {
         controls = new PlayerControls();
+        mySP = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
@@ -66,10 +69,8 @@ public class PlayerMove : MonoBehaviour
         }
 
         transform.Translate(movementInput * speed * Time.deltaTime);
-        if (movementInput.x < 0)
-        {
-            GetComponent<SpriteRenderer>().flipX = true;
-        }
+
+        mySP.flipX = (movementInput.x < 0);
     }
 
     private void UseAbility(int abilityType)
