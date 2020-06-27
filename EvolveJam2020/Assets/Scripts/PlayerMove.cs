@@ -20,6 +20,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     Vector2 movementInput = new Vector2();
 
+    Animator anim;
+
     private PlayerControls controls = null;
 
     private SpriteRenderer mySP;
@@ -28,6 +30,8 @@ public class PlayerMove : MonoBehaviour
     {
         controls = new PlayerControls();
         mySP = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+
     }
 
     private void OnEnable()
@@ -72,6 +76,8 @@ public class PlayerMove : MonoBehaviour
         }
 
         transform.Translate(movementInput * speed * Time.deltaTime);
+        anim.SetFloat("MoveSide", Mathf.Abs(movementInput.x));
+        anim.SetFloat("MoveUp", Mathf.Abs(movementInput.y));
 
         mySP.flipX = (movementInput.x < 0);
     }
