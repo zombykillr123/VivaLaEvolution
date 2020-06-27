@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class Gen1R1 : Genome
 {
-    // Start is called before the first frame update
-    void Start()
+    public Gen1R1()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        this.name = "Fire Resistance";
+        this.traitClass = 'R';
     }
 }

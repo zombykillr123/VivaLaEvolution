@@ -89,7 +89,15 @@ public class PlayerMove : MonoBehaviour
 
     private void Evolve()
     {
-        Debug.Log("You evolved!");
+        try
+        {
+            Mutator mut = GetComponent<Mutator>();
+            //gameObject.genomes.add(mut.Evolve(int round number)); not implemented yet
+            mut.playerGenomes[0] = mut.Evolve();
+        } catch (System.Exception e)
+        {
+            Debug.Log("Please attach a mutator.cs to this player!");
+        }
     }
     
 }

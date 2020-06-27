@@ -1,14 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public abstract class Genome : MonoBehaviour
 {
 
     // Trait Class simply corresponds to the loot pool for each of our creature types. ( for example, red genome pool = r, blue genome pool = b ect... )
     public char traitClass;
     public int gen;
-
+    public new string name;
 
     public Genome()
     {
