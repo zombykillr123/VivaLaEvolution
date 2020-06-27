@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+    /// <summary>
+    /// Animation of the clock
+    /// </summary>
+    private Animator myClockAnim; 
 
     [SerializeField]
     private int myType; // not using enums right now, can do it later
 
+    [Header("Time in seconds it takes to pick this up")]
     [SerializeField]
     private float timerDefault;
 
@@ -27,6 +32,10 @@ public class Pickup : MonoBehaviour
 
         timerObject = transform.GetChild(0).gameObject;
         timerObject.SetActive(false);
+
+        myClockAnim = timerObject.GetComponent<Animator>();
+
+        myClockAnim.speed = 1 / timerDefault;
     }
 
     // Update is called once per frame
