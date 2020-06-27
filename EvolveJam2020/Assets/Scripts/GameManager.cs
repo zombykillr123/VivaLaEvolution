@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Pickups you own
     /// </summary>
-    private List<int> ownedPickups;
+    public List<int> ownedPickups;
 
     /// <summary>
     /// Number of pickups still in this level
@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("This is when the level ends maybe idk");
         }
     }
-
 
     /// <summary>
     /// Sets the number of pickups in the level. When it reaches 0 it does something
