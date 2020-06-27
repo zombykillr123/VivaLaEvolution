@@ -4,15 +4,26 @@ using UnityEngine;
 
 public abstract class Genome : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    // Trait Class simply corresponds to the loot pool for each of our creature types. ( for example, red genome pool = b, blue genome pool = b ect... )
+    public char traitClass;
+    public int gen;
+
+
+    public Genome()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public Genome(int round, char traitClass)
     {
-        
+        this.traitClass = traitClass;
+        if (round == 2)
+            gen = 1;
+        if (round == 4)
+            gen = 2;
+        if (round == 6)
+            gen = 3;
     }
+
 }

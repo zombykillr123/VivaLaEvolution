@@ -8,7 +8,7 @@ public class Mutator : MonoBehaviour
 
     protected int evolution;
     int gameRound;
-
+    GameObject[] savedCreatures;
     public static Genome Evolve()
     {
         return new Gen1R1();
