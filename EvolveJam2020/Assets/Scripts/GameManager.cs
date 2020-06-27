@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,7 +22,9 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Pickups reference this to get color
     /// </summary>
-    public Color[] pickupColors;
+    public Sprite[] pickupSprites;
+
+    public AnimatorController[] pickupAnimations;
 
     /// <summary>
     /// All pickups in the level
@@ -75,5 +79,10 @@ public class GameManager : MonoBehaviour
     {
         allPickups = GameObject.FindGameObjectsWithTag("pickup");
         remainingPickups = allPickups.Length;
+    }
+
+    public void RetartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

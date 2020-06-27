@@ -99,5 +99,13 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("Please attach a mutator.cs to this player!");
         }
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            GameManager.instance.RetartScene();
+        }
+    }
+
 }

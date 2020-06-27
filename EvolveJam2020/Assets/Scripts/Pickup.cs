@@ -28,10 +28,12 @@ public class Pickup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = GameManager.instance.pickupColors[myType];
+        gameObject.GetComponent<SpriteRenderer>().sprite = GameManager.instance.pickupSprites[myType];
 
         timerObject = transform.GetChild(0).gameObject;
         timerObject.SetActive(false);
+
+        GetComponent<Animator>().runtimeAnimatorController = GameManager.instance.pickupAnimations[myType];
 
         myClockAnim = timerObject.GetComponent<Animator>();
 
