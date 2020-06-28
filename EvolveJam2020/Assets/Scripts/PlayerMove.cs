@@ -17,6 +17,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float speed = 3;
 
+    public bool shielded;
+
     [SerializeField]
     Vector2 movementInput = new Vector2();
 
@@ -26,6 +28,7 @@ public class PlayerMove : MonoBehaviour
 
     private SpriteRenderer mySP;
 
+    [HideInInspector]
     public string a1, a2;
 
     private void Awake()
@@ -61,6 +64,12 @@ public class PlayerMove : MonoBehaviour
 
     #region WATER ABILITIES
 
+    private bool waterOnCooldown;
+    private float waterCooldownTime;
+
+    [SerializeField]
+    private GameObject waterShieldObj;
+
     public void WaterWhip()
     {
         Debug.Log($"{myType} just used WaterWhip at level {GameManager.instance.waterLevel}");
@@ -69,12 +78,33 @@ public class PlayerMove : MonoBehaviour
     public void WaterShield()
     {
         Debug.Log($"{myType} just used WaterShield at level {GameManager.instance.waterLevel}");
+        // Check cooldown
+        if (!waterOnCooldown && !shielded)
+        {
+            // Instantiate the water shield
+            GameObject clone = Instantiate(waterShieldObj, transform, false);
+
+            shielded = true;
+
+            // Set the cooldown
+            waterOnCooldown = true;
+            waterCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.waterLevel * 0.25f));
+
+            // Duration scales with level
+            Destroy(clone, 10 + GameManager.instance.waterLevel * 0.25f);
+        }
     }
 
     #endregion
 
 
     #region FIRE ABILITIES
+
+    private bool fireOnCooldown;
+    private float fireCooldownTime;
+
+    [SerializeField]
+    private GameObject fireShieldObj;
 
     public void FireBall()
     {
@@ -84,12 +114,34 @@ public class PlayerMove : MonoBehaviour
     public void FireShield()
     {
         Debug.Log($"{myType} just used FireShield at level {GameManager.instance.fireLevel}");
+
+        // Check cooldown
+        if (!fireOnCooldown && !shielded)
+        {
+            // Instantiate the fire shield
+            GameObject clone = Instantiate(fireShieldObj, transform, false);
+
+            shielded = true;
+
+            // Set the cooldown
+            fireOnCooldown = true;
+            fireCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.fireLevel * 0.25f));
+
+            // Duration scales with level
+            Destroy(clone, 10 + GameManager.instance.fireLevel * 0.25f);            
+        }
     }
 
     #endregion
 
 
     #region AIR ABILITIES
+
+    private bool airOnCooldown;
+    private float airCooldownTime;
+
+    [SerializeField]
+    private GameObject airShieldObj;
 
     public void AirBlade()
     {
@@ -101,6 +153,22 @@ public class PlayerMove : MonoBehaviour
     public void AirShield()
     {
         Debug.Log($"{myType} just used AirShield at level {GameManager.instance.airLevel}");
+
+        // Check cooldown
+        if (!airOnCooldown && !shielded)
+        {
+            // Instantiate the air shield
+            GameObject clone = Instantiate(airShieldObj, transform, false);
+
+            shielded = true;
+
+            // Set the cooldown
+            airOnCooldown = true;
+            airCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.airLevel * 0.25f));
+
+            // Duration scales with level
+            Destroy(clone, 10 + GameManager.instance.airLevel * 0.25f);
+        }
     }
 
     #endregion
@@ -108,9 +176,31 @@ public class PlayerMove : MonoBehaviour
 
     #region EARTH ABILITIES
 
+    private bool earthOnCooldown;
+    private float earthCooldownTime;
+
+    [SerializeField]
+    private GameObject earthShieldObj;
+
     public void EarthShield()
     {
         Debug.Log($"{myType} just used EarthShield at level {GameManager.instance.earthLevel}");
+
+        // Check cooldown
+        if (!earthOnCooldown && !shielded)
+        {
+            // Instantiate the earth shield
+            GameObject clone = Instantiate(earthShieldObj, transform, false);
+
+            shielded = true;
+
+            // Set the cooldown
+            earthOnCooldown = true;
+            earthCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.earthLevel * 0.25f));
+
+            // Duration scales with level
+            Destroy(clone, 10 + GameManager.instance.earthLevel * 0.25f);
+        }
     }
 
     public void RockSlide()
@@ -121,7 +211,6 @@ public class PlayerMove : MonoBehaviour
     #endregion
 
     
-
     private void OnDisable()
     {
         controls.Player1.Disable();
@@ -130,7 +219,43 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        Move();        
+        Move();
+        
+        if (waterCooldownTime > 0)
+        {
+            waterCooldownTime -= Time.deltaTime;
+            if (waterCooldownTime <= 0)
+            {
+                waterOnCooldown = false;
+            }
+        }
+
+        if (fireCooldownTime > 0)
+        {
+            fireCooldownTime -= Time.deltaTime;
+            if (fireCooldownTime <= 0)
+            {
+                fireOnCooldown = false;
+            }
+        }
+
+        if (airCooldownTime > 0)
+        {
+            airCooldownTime -= Time.deltaTime;
+            if (airCooldownTime <= 0)
+            {
+                airOnCooldown = false;
+            }
+        }
+
+        if (earthCooldownTime > 0)
+        {
+            earthCooldownTime -= Time.deltaTime;
+            if (earthCooldownTime <= 0)
+            {
+                earthOnCooldown = false;
+            }
+        }
     }
 
     private void Move()
@@ -167,7 +292,15 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            GameManager.instance.EndGame();
+            if (!shielded)
+            {
+                GameManager.instance.EndGame();
+            }
+            else
+            {
+                Destroy(collision.gameObject);
+                GameManager.instance.enemiesKilled++;
+            }
         }
     }
 }

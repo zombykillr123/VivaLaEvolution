@@ -104,6 +104,8 @@ MonoBehaviour:
   movementInput: {x: 0, y: 0}
   a1: 
   a2: 
+  fireShieldObj: {fileID: 3325718792540329946, guid: f46710f16d25d0846b578837511673bf,
+    type: 3}
 --- !u!114 &5727225439647127594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EvolutionPoints: 0
   m_Element: 0
+  Primary: 
+  Secondary: 
 --- !u!61 &3806577265956385951
 BoxCollider2D:
   m_ObjectHideFlags: 0

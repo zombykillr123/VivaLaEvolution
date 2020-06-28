@@ -67,12 +67,4 @@ public class EnemyMove : MonoBehaviour
         target = GameManager.instance.GetPlayer(randPlayer).transform;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "attack")
-        {
-            GameManager.instance.enemiesKilled++;
-            Destroy(gameObject);
-        }
-    }
 }
