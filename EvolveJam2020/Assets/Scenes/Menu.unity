@@ -725,12 +725,12 @@ MonoBehaviour:
 
 
     P2 - Use Arrows to
-    move, and </> for abilities
+    move, and </> or numpad 1/2 for abilities
 
 
-    Last as long as possible. Touching a Zombie
-    or losing too many Genomes to Zombies ends the game. Each Genome evolves an ability,
-    and makes the game slightly more difficult.'
+    Last as long as possible. Touching
+    a Zombie or losing too many Genomes to Zombies ends the game. Each Genome evolves
+    an ability, and makes the game slightly more difficult.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -775,7 +775,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 265
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -799,12 +799,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 21.41632, w: 0}
   m_textInfo:
     textComponent: {fileID: 250914222}
-    characterCount: 266
+    characterCount: 280
     spriteCount: 0
-    spaceCount: 51
-    wordCount: 50
+    spaceCount: 54
+    wordCount: 54
     linkCount: 0
-    lineCount: 8
+    lineCount: 9
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1090,7 +1090,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Evolution
+  m_text: EVOLVED
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1159,7 +1159,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 597860311}
-    characterCount: 9
+    characterCount: 7
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
