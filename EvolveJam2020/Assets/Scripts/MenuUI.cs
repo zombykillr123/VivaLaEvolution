@@ -23,6 +23,7 @@ public class MenuUI : MonoBehaviour
 
     public void Menu()
     {
+        Destroy(GameManager.instance.gameObject);
         SceneManager.LoadScene(0);
     }
 }

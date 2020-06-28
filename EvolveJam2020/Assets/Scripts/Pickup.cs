@@ -45,6 +45,8 @@ public class Pickup : MonoBehaviour
         myClockAnim = timerObject.GetComponent<Animator>();
 
         myClockAnim.speed = 1 / timerDefault;
+
+        Destroy(gameObject, 30);
     }
 
     // Update is called once per frame

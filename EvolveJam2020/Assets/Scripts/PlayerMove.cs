@@ -68,11 +68,21 @@ public class PlayerMove : MonoBehaviour
     private float waterCooldownTime;
 
     [SerializeField]
-    private GameObject waterShieldObj;
+    private GameObject waterShieldObj, whirpoolObj;
 
-    public void WaterWhip()
+    public void Whirpool()
     {
-        Debug.Log($"{myType} just used WaterWhip at level {GameManager.instance.waterLevel}");
+        Debug.Log($"{myType} just used Whirpool at level {GameManager.instance.waterLevel}");
+        if (!waterOnCooldown)
+        {
+            // Spawn the whirpool
+            GameObject clone = Instantiate(whirpoolObj, transform.position, Quaternion.identity);
+            Destroy(clone, 10 + GameManager.instance.waterLevel * 0.25f);
+
+            // Set the cooldown
+            waterOnCooldown = true;
+            waterCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.waterLevel * 0.25f));
+        }
     }
 
     public void WaterShield()
@@ -187,7 +197,7 @@ public class PlayerMove : MonoBehaviour
     private float earthCooldownTime;
 
     [SerializeField]
-    private GameObject earthShieldObj;
+    private GameObject earthShieldObj, rockSlideObj;
 
     public void EarthShield()
     {
@@ -213,6 +223,15 @@ public class PlayerMove : MonoBehaviour
     public void RockSlide()
     {
         Debug.Log($"{myType} just used RockSlide at level {GameManager.instance.earthLevel}");
+        if (!earthOnCooldown)
+        {
+            GameObject clone = Instantiate(rockSlideObj, transform.position, Quaternion.identity);
+
+            // Set the cooldown
+            earthOnCooldown = true;
+            earthCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.earthLevel * 0.25f));
+            Destroy(clone, 15f);
+        }
     }
 
     #endregion

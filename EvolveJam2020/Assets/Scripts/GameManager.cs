@@ -27,10 +27,16 @@ public class GameManager : MonoBehaviour
     private int destroyedThreshold;
 
     /// <summary>
-    /// Where Genomes/Enemies will spawn from
+    /// Where Genomes will spawn from
     /// </summary>
     [SerializeField]
     private GameObject[] spawnPoints;
+
+    /// <summary>
+    /// Where enemies spawn from
+    /// </summary>
+    [SerializeField]
+    private GameObject[] enemySpawnPoints;
 
     /// <summary>
     /// Which spawn points are occupied currently
@@ -224,8 +230,6 @@ public class GameManager : MonoBehaviour
         // Pick how many enemies to spawn
         int howManyEnemies = Random.Range(0, howManyGenomes+1);
 
-        howManyEnemies = Mathf.Clamp(howManyEnemies, 0, availableSpawns.Count - howManyGenomes);
-
         Debug.Log($"Spawning Info: {howManyEnemies} Enemies, {howManyGenomes} Genomes and {availableSpawns.Count} spawn points");
 
         // For each genome being spawned
@@ -248,12 +252,11 @@ public class GameManager : MonoBehaviour
         // For each enemy
         for (int i = 0; i < howManyEnemies; i++)
         {
-            // Pick a random available spawn
-            int spawnID = availableSpawns[Random.Range(0, availableSpawns.Count)];
+            // Pick a random spawn
+            int spawnID = Random.Range(0, enemySpawnPoints.Length);
 
-            // Spawn the Genome
-            Instantiate(enemyObject, spawnPoints[spawnID].transform, false);            
-            availableSpawns.Remove(spawnID);
+            // Spawn the Enemy
+            Instantiate(enemyObject, enemySpawnPoints[spawnID].transform, false);          
         }
 
         // Reset the spawn counter

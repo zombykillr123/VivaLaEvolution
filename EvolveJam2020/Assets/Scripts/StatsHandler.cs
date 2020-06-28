@@ -20,7 +20,7 @@ public class StatsHandler : MonoBehaviour
 
         int total = water + earth + fire + air;
 
-        textBlock.text = Mathf.FloorToInt(t / 60).ToString() + ":" + Mathf.FloorToInt(t % 60).ToString() +
+        textBlock.text = Mathf.FloorToInt(t / 60).ToString() + ":" + Mathf.FloorToInt(t % 60).ToString("00") +
             "\n" + kills.ToString() +
             "\n" + total.ToString() +
             "\n" + water.ToString() +
