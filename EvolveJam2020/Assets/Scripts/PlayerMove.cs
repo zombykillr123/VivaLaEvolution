@@ -60,6 +60,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         controls.Player1.Evolve.performed += ctx => Evolve();
+        controls.Player1.Pause.performed += ctx => GameManager.instance.PauseGame();
     }
 
     #region WATER ABILITIES

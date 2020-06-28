@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject enemyObject;
 
+    [SerializeField]
+    private GameObject pausePanel;
+
     #endregion
 
     #region POWER VARIABLES
@@ -128,7 +131,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// How much the enemy's speed increases each level up
     /// </summary>
-    private static float enemySpeedIncrement = 0.005f;
+    private static float enemySpeedIncrement = 0.01f;
 
 
 
@@ -145,7 +148,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// How much the time to grab a genome increases each level up
     /// </summary>
-    private static float genomeGrabTimeIncrement = 0.01f;
+    private static float genomeGrabTimeIncrement = 0.05f;
 
     #endregion
 
@@ -187,9 +190,23 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        instance = this;        
+        instance = this;
+
+        pausePanel.SetActive(false);
 
         StartGame();
+    }
+
+    public void PauseGame()
+    {
+        pausePanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void Continue()
+    {
+        pausePanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -498,6 +515,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over");
         inGame = false;
+        Time.timeScale = 1;
         SceneManager.LoadScene(2);
     }
 

@@ -65,6 +65,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""b1b53785-bb35-4118-b5fa-2af1508cf167"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -175,6 +183,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Evolve"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""463520ea-4108-4a6b-892b-35112dc5e967"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -360,6 +379,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Player1_Ability3 = m_Player1.FindAction("Ability3", throwIfNotFound: true);
         m_Player1_Ability4 = m_Player1.FindAction("Ability4", throwIfNotFound: true);
         m_Player1_Evolve = m_Player1.FindAction("Evolve", throwIfNotFound: true);
+        m_Player1_Pause = m_Player1.FindAction("Pause", throwIfNotFound: true);
         // Player2
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Move = m_Player2.FindAction("Move", throwIfNotFound: true);
@@ -422,6 +442,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player1_Ability3;
     private readonly InputAction m_Player1_Ability4;
     private readonly InputAction m_Player1_Evolve;
+    private readonly InputAction m_Player1_Pause;
     public struct Player1Actions
     {
         private @PlayerControls m_Wrapper;
@@ -432,6 +453,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Ability3 => m_Wrapper.m_Player1_Ability3;
         public InputAction @Ability4 => m_Wrapper.m_Player1_Ability4;
         public InputAction @Evolve => m_Wrapper.m_Player1_Evolve;
+        public InputAction @Pause => m_Wrapper.m_Player1_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -459,6 +481,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Evolve.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnEvolve;
                 @Evolve.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnEvolve;
                 @Evolve.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnEvolve;
+                @Pause.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_Player1ActionsCallbackInterface = instance;
             if (instance != null)
@@ -481,6 +506,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Evolve.started += instance.OnEvolve;
                 @Evolve.performed += instance.OnEvolve;
                 @Evolve.canceled += instance.OnEvolve;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -558,6 +586,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnAbility3(InputAction.CallbackContext context);
         void OnAbility4(InputAction.CallbackContext context);
         void OnEvolve(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IPlayer2Actions
     {
