@@ -16,7 +16,11 @@ public class ElementLoadout : MonoBehaviour
 
     [SerializeField] private int m_EvolutionPoints = 0;
     [SerializeField] public Element m_Element;
-
+    [SerializeField] public string Primary;
+    [SerializeField] public string Secondary;
+    public Trait PrimaryTrait;
+    public Trait SecondaryTrait;
+    
     int gameRound;
-    GameObject[] savedCreatures;
+    
 }
