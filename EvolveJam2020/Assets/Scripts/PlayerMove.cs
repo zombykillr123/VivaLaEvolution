@@ -178,7 +178,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            GameManager.instance.RetartScene();
+            GameManager.instance.EndGame();
         }
     }
 }
