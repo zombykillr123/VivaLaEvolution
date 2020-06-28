@@ -1658,10 +1658,10 @@ MonoBehaviour:
   airPowers:
   - AirBlade
   - AirShield
-  waterLevel: 0
-  earthLevel: 0
-  fireLevel: 0
-  airLevel: 0
+  waterLevel: 10
+  earthLevel: 10
+  fireLevel: 10
+  airLevel: 10
   enemySpeed: 0.3
   enemiesKilled: 0
   timeSurvived: 0
