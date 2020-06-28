@@ -167,12 +167,10 @@ public class PlayerMove : MonoBehaviour
     {
         try
         {
-            Mutator mut = GetComponent<Mutator>();
-            //gameObject.genomes.add(mut.Evolve(int round number)); not implemented yet
-            mut.playerGenomes[0] = mut.Evolve();
+            ElementLoadout el = GetComponent<ElementLoadout>();
         } catch (System.Exception e)
         {
-            Debug.Log("Please attach a mutator.cs to this player!");
+            Debug.Log("Please attach ElementLoadout.cs to this player!");
         }
     }
 

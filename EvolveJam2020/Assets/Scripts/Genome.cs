@@ -1,31 +1,24 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
 public abstract class Genome : MonoBehaviour
 {
 
-    // Trait Class simply corresponds to the loot pool for each of our creature types. ( for example, red genome pool = r, blue genome pool = b ect... )
-    public char traitClass;
-    public int gen;
+    // Trait Class simply corresponds to the ability pool for each of our creature types. ( for example, red genome pool = r, blue genome pool = b ect... )
+    int PlayerCount;
+    [SerializeField] static List<Element> elements = new List<Element> { Element.Fire, Element.Air, Element.Water, Element.Earth };
+    static Stack<Element> assignmentStack;
     public new string name;
 
-    public Genome()
-    {
+    private static void Awake()
+    { 
 
     }
 
-    public Genome(int round, char traitClass)
-    {
-        this.traitClass = traitClass;
-        if (round == 2)
-            gen = 1;
-        if (round == 4)
-            gen = 2;
-        if (round == 6)
-            gen = 3;
-    }
+
 
 }
