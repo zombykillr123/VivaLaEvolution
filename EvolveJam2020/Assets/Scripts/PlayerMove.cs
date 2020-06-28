@@ -156,7 +156,8 @@ public class PlayerMove : MonoBehaviour
         try
         {
             ElementLoadout el = GetComponent<ElementLoadout>();
-        } catch (System.Exception e)
+        } 
+        catch (System.Exception e)
         {
             Debug.Log("Please attach ElementLoadout.cs to this player!");
         }
