@@ -87,7 +87,11 @@ public class Pickup : MonoBehaviour
                 Destroy(gameObject);
             }
             yield return null;
-        }
-        
+        }        
+    }
+
+    public void SetInt(int id)
+    {
+        myType = id;
     }
 }

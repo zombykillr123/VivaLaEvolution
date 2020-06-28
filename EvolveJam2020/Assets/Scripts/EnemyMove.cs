@@ -6,12 +6,7 @@ public class EnemyMove : MonoBehaviour
 {
     [Header("Set target, leave blank for random")]
     [SerializeField]
-    private Transform targetPlayer;
-
-    /// <summary>
-    /// Which pickup it's targetting. Randomly chosen if not set above
-    /// </summary>
-    private int targetPickup;
+    private Transform target;
 
     [SerializeField]
     private float speed;
@@ -23,31 +18,36 @@ public class EnemyMove : MonoBehaviour
     void Start()
     {        
         mySP = GetComponent<SpriteRenderer>();
-        if (targetPlayer == null)
-        {
-            TargetNewPickup();
-        }
+
+        TargetNewPickup();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (targetPlayer != null)
+        if (target != null)
         {
-            transform.position = Vector2.MoveTowards(transform.position, targetPlayer.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
         else
         {
             // Pick a random pickup
             TargetNewPickup();
         }
-        mySP.flipX = (targetPlayer.position.x > transform.position.x);
+        mySP.flipX = (target.position.x > transform.position.x);
     }
 
     private void TargetNewPickup()
     {
         GameObject[] pickups = GameManager.instance.allPickups;
+        if (pickups.Length == 0)
+        {
+            // Pick a player instead
+            int randPlayer = Random.Range(1, 3);
+
+            target = GameManager.instance.GetPlayer(randPlayer).transform;            
+        }
         int randPickup = Random.Range(0, pickups.Length);
-        targetPlayer = pickups[randPickup].transform;
+        target = pickups[randPickup].transform;
     }
 }
