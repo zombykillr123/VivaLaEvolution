@@ -28,7 +28,6 @@ public class PlayerMove : MonoBehaviour
 
     private SpriteRenderer mySP;
 
-    [HideInInspector]
     public string a1, a2;
 
     private void Awake()
@@ -59,6 +58,7 @@ public class PlayerMove : MonoBehaviour
             MethodInfo a2Func = GetType().GetMethod(a2);
             controls.Player2.Ability2.performed += ctx => a2Func.Invoke(this, null);
         }
+
         controls.Player1.Evolve.performed += ctx => Evolve();
     }
 
@@ -70,7 +70,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private GameObject waterShieldObj, whirpoolObj;
 
-    public void Whirpool()
+    public void WhirlPool()
     {
         Debug.Log($"{myType} just used Whirpool at level {GameManager.instance.waterLevel}");
         if (!waterOnCooldown)
@@ -82,6 +82,7 @@ public class PlayerMove : MonoBehaviour
             // Set the cooldown
             waterOnCooldown = true;
             waterCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.waterLevel * 0.25f));
+            GameManager.instance.selectedWaterIcon.SetActive(false);
         }
     }
 
@@ -99,6 +100,7 @@ public class PlayerMove : MonoBehaviour
             // Set the cooldown
             waterOnCooldown = true;
             waterCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.waterLevel * 0.25f));
+            GameManager.instance.selectedWaterIcon.SetActive(false);
 
             // Duration scales with level
             Destroy(clone, 10 + GameManager.instance.waterLevel * 0.25f);
@@ -125,6 +127,7 @@ public class PlayerMove : MonoBehaviour
             GameObject clone = Instantiate(fireBlastObj, transform, false);
             clone.transform.localScale *= 1 + (GameManager.instance.fireLevel * 0.1f);
             fireCooldownTime = fireCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.fireLevel * 0.25f));
+            GameManager.instance.selectedFireIcon.SetActive(false);
         }
     }
 
@@ -143,6 +146,7 @@ public class PlayerMove : MonoBehaviour
             // Set the cooldown
             fireOnCooldown = true;
             fireCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.fireLevel * 0.25f));
+            GameManager.instance.selectedFireIcon.SetActive(false);
 
             // Duration scales with level
             Destroy(clone, 10 + GameManager.instance.fireLevel * 0.25f);            
@@ -171,11 +175,12 @@ public class PlayerMove : MonoBehaviour
 
         clone.transform.localScale *= 1 + (GameManager.instance.airLevel * 0.1f);
 
-        Destroy(clone, 10 + GameManager.instance.airLevel * 0.25f);
+        Destroy(clone, 5 + GameManager.instance.airLevel * 0.25f);
 
         // Set the cooldown
         airOnCooldown = true;
         airCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.airLevel * 0.25f));
+        GameManager.instance.selectedAirIcon.SetActive(false);
     }
 
     public void AirShield()
@@ -193,6 +198,7 @@ public class PlayerMove : MonoBehaviour
             // Set the cooldown
             airOnCooldown = true;
             airCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.airLevel * 0.25f));
+            GameManager.instance.selectedAirIcon.SetActive(false);
 
             // Duration scales with level
             Destroy(clone, 10 + GameManager.instance.airLevel * 0.25f);
@@ -225,6 +231,7 @@ public class PlayerMove : MonoBehaviour
             // Set the cooldown
             earthOnCooldown = true;
             earthCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.earthLevel * 0.25f));
+            GameManager.instance.selectedEarthIcon.SetActive(false);
 
             // Duration scales with level
             Destroy(clone, 10 + GameManager.instance.earthLevel * 0.25f);
@@ -241,6 +248,7 @@ public class PlayerMove : MonoBehaviour
             // Set the cooldown
             earthOnCooldown = true;
             earthCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.earthLevel * 0.25f));
+            GameManager.instance.selectedEarthIcon.SetActive(false);
             Destroy(clone, 15f);
         }
     }
@@ -259,11 +267,12 @@ public class PlayerMove : MonoBehaviour
         Move();
         
         if (waterCooldownTime > 0)
-        {
+        {            
             waterCooldownTime -= Time.deltaTime;
             if (waterCooldownTime <= 0)
             {
                 waterOnCooldown = false;
+                GameManager.instance.selectedWaterIcon.SetActive(true);
             }
         }
 
@@ -273,6 +282,7 @@ public class PlayerMove : MonoBehaviour
             if (fireCooldownTime <= 0)
             {
                 fireOnCooldown = false;
+                GameManager.instance.selectedFireIcon.SetActive(true);
             }
         }
 
@@ -282,6 +292,7 @@ public class PlayerMove : MonoBehaviour
             if (airCooldownTime <= 0)
             {
                 airOnCooldown = false;
+                GameManager.instance.selectedAirIcon.SetActive(true);
             }
         }
 
@@ -291,6 +302,7 @@ public class PlayerMove : MonoBehaviour
             if (earthCooldownTime <= 0)
             {
                 earthOnCooldown = false;
+                GameManager.instance.selectedEarthIcon.SetActive(true);
             }
         }
     }

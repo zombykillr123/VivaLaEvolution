@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// How fast enemies move (increases as you level up)
     /// </summary>
-    public float enemySpeed = 0.3f;
+    public float enemySpeed = 0.35f;
 
     /// <summary>
     /// The maximum speed an enemy can move
@@ -166,6 +166,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI timerText, genomesRemainingText;
+
+    public GameObject[] waterIcons, earthIcons, fireIcons, airIcons;
+
+    [HideInInspector]
+    public GameObject selectedWaterIcon, selectedEarthIcon, selectedFireIcon, selectedAirIcon;
+
+    public GameObject[] iconSlots;
 
     #endregion
 
@@ -383,16 +390,28 @@ public class GameManager : MonoBehaviour
         // Generate abilities for that game
 
         // Pick random Water Ability
-        waterPower = waterPowers[Random.Range(0, waterPowers.Length)];        
+        int rand = Random.Range(0, waterPowers.Length);
+        waterPower = waterPowers[rand];
+        selectedWaterIcon = waterIcons[rand];
+        selectedWaterIcon.SetActive(true);
 
         // Pick random Earth Ability
-        earthPower = earthPowers[Random.Range(0, earthPowers.Length)];
+        rand = Random.Range(0, earthPowers.Length);
+        earthPower = earthPowers[rand];
+        selectedEarthIcon = earthIcons[rand];
+        selectedEarthIcon.SetActive(true);
 
         // Pick random Fire Ability
-        firePower = firePowers[Random.Range(0, firePowers.Length)];
+        rand = Random.Range(0, firePowers.Length);
+        firePower = firePowers[rand];
+        selectedFireIcon = fireIcons[rand];
+        selectedFireIcon.SetActive(true);
 
         // Pick random Air Ability
-        airPower = airPowers[Random.Range(0, airPowers.Length)];
+        rand = Random.Range(0, airPowers.Length);
+        airPower = airPowers[rand];
+        selectedAirIcon = airIcons[rand];
+        selectedAirIcon.SetActive(true);
 
         // Keep track of the chosen power of each type
         chosenPowers = new List<string>() { waterPower, earthPower, firePower, airPower };
@@ -415,28 +434,59 @@ public class GameManager : MonoBehaviour
         genomesRemainingText.text = $"Genomes Remaining: {destroyedThreshold - destroyedGenomes}";
     }
 
+    public void NewAssignAbilities(PlayerMove script, int abilityNum, string ability)
+    {
+        if (abilityNum == 1)
+        {
+            script.a1 = GetAbility(ability);
+        }
+        else
+        {
+            script.a2 = GetAbility(ability);
+        }
+    }
+
+    public string GetAbility(string type)
+    {
+        switch (type)
+        {
+            case "Water":
+                return waterPower;
+            case "Earth":
+                return earthPower;
+            case "Fire":
+                return firePower;
+            case "Air":
+                return airPower;
+            default:
+                Debug.LogError("GetAbility not finding ability");
+                return null;
+        }
+    }
+
     /// <summary>
     /// Adds the ability to a random player's arsenal (max of 2 per player)
     /// </summary>
     private void AssignAbilities()
     {
-        // Pick 2 random abilities to give to each player
-
-        p1Script.a1 = GetRandomAbility();
-        p1Script.a2 = GetRandomAbility();
-        p2Script.a1 = GetRandomAbility();
-        p2Script.a2 = GetRandomAbility();
+        // Pick 2 random abilities to give to each player        
+        p1Script.a1 = GetRandomAbility(0);
+        p1Script.a2 = GetRandomAbility(1);
+        p2Script.a1 = GetRandomAbility(2);
+        p2Script.a2 = GetRandomAbility(3);
     }
 
     /// <summary>
     /// Grab a random ability and return its name
     /// </summary>
     /// <returns></returns>
-    private string GetRandomAbility()
+    private string GetRandomAbility(int iconSpot)
     {        
         int randIndex = Random.Range(0, chosenPowers.Count);
         string randPower = chosenPowers[randIndex];
         chosenPowers.RemoveAt(randIndex);
+
+        GameObject.Find(randPower + "Icon").transform.position = iconSlots[iconSpot].transform.position;
 
         return randPower;
     }
