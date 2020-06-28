@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Shuffle : MonoBehaviour
+//Place on camera or empty game object
+
+public class Shuffler : MonoBehaviour
 {
     int players;
     [SerializeField]  List<Element> elements = new List<Element> { Element.Fire, Element.Air, Element.Water, Element.Earth };
-
+    private Stack<Element> randomized;
     // Start is called before the first frame update
     private void Awake()
     {
-        Stack randomized = new Stack();
+         randomized = new Stack<Element>();
         GameObject [] players = GameObject.FindGameObjectsWithTag("Player");
         var rand = new System.Random();
         elements = elements.OrderBy(x => rand.Next()).ToList();
