@@ -2031,11 +2031,11 @@ MonoBehaviour:
   - {fileID: 5849487209316201004, guid: 338916a63125142eb9489df7b3f955ee, type: 3}
   - {fileID: -8905739304349350692, guid: 338916a63125142eb9489df7b3f955ee, type: 3}
   - {fileID: -2834902653329517793, guid: 338916a63125142eb9489df7b3f955ee, type: 3}
-  pickupAnimations:
-  - {fileID: 9100000, guid: a3c5348cfab9e4dd9b6c9da3443f137e, type: 2}
-  - {fileID: 9100000, guid: 3dbfe38d0b56c467a8caf2b5132aebee, type: 2}
-  - {fileID: 9100000, guid: 863dd1743f3274eabb3dd11cb867fec4, type: 2}
-  - {fileID: 9100000, guid: 2fefcd6393aaf46388c6d827fe7fbfdc, type: 2}
+  allGenomes:
+  - {fileID: 3135328616733049639, guid: 37e8ff8b085d72842871ff0606519c2e, type: 3}
+  - {fileID: 5379974817991687393, guid: 050607159369d644d9f96469c589abf0, type: 3}
+  - {fileID: 5426001332429191318, guid: 80f14173becf6d342a072d52a9d8e836, type: 3}
+  - {fileID: 6694349417528705566, guid: 38c4c3728ec393f449ac5135b64e706e, type: 3}
   p1Script: {fileID: 2017199895}
   p2Script: {fileID: 1197991463}
   destroyedThreshold: 5
