@@ -22,5 +22,11 @@ public class ElementLoadout : MonoBehaviour
     public Trait SecondaryTrait;
     
     int gameRound;
-    
+
+    private void Awake()
+    {
+        if (PrimaryTrait == null && SecondaryTrait == null)
+            Debug.Log("Please make sure shuffler.cs is in the scene somewhere!");
+    }
+
 }

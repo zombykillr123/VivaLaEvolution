@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -423,6 +424,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67172969587ceac4e88d0a6d1491c47a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elements: 00000000030000000100000002000000
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -490,9 +504,10 @@ GameObject:
   m_Component:
   - component: {fileID: 520484248}
   - component: {fileID: 520484247}
+  - component: {fileID: 520484249}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -561,6 +576,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &520484249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520484246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a24670dc3e4af34b93f7095026af92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EvolutionPoints: 0
+  m_Element: 0
+  Primary: 
+  Secondary: 
 --- !u!1 &544212804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1953,10 +1984,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2002584448}
   - component: {fileID: 2002584447}
+  - component: {fileID: 2002584449}
   - component: {fileID: 2002584446}
   m_Layer: 0
   m_Name: player_0
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2045,6 +2077,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2002584449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002584445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a24670dc3e4af34b93f7095026af92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EvolutionPoints: 0
+  m_Element: 0
+  Primary: 
+  Secondary: 
 --- !u!1 &2136217611
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,6 @@ using UnityEngine;
 public class Shuffler : MonoBehaviour
 {
     int players;
-    [SerializeField] GameObject abilities;
     [SerializeField]  List<Element> elements = new List<Element> { Element.Fire, Element.Air, Element.Water, Element.Earth };
     private Stack<Element> randomized;
     // Start is called before the first frame update
