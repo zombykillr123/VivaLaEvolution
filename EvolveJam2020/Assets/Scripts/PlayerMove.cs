@@ -158,13 +158,24 @@ public class PlayerMove : MonoBehaviour
     private float airCooldownTime;
 
     [SerializeField]
-    private GameObject airShieldObj;
+    private GameObject airShieldObj, airBladeObj;
 
     public void AirBlade()
     {
         // spawn air blade
-        // Distance it travels is equal to AirLevel
+        // Size it covers is proportionate to AirLevel
         Debug.Log($"{myType} just used AirBlade at level {GameManager.instance.airLevel}");
+
+        // Spawn the air blade
+        GameObject clone = Instantiate(airBladeObj, transform, false);
+
+        clone.transform.localScale *= 1 + (GameManager.instance.airLevel * 0.1f);
+
+        Destroy(clone, 10 + GameManager.instance.airLevel * 0.25f);
+
+        // Set the cooldown
+        airOnCooldown = true;
+        airCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.airLevel * 0.25f));
     }
 
     public void AirShield()
