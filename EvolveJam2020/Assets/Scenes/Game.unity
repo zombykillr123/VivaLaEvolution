@@ -163,6 +163,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 646591375825396752, guid: 948b13ea123acfe48ad4c1ea0c910af6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 646591375825396753, guid: 948b13ea123acfe48ad4c1ea0c910af6,
         type: 3}
       propertyPath: types.Array.size
@@ -185,6 +190,12 @@ PrefabInstance:
       propertyPath: earthShieldObj
       value: 
       objectReference: {fileID: 2101717357195176540, guid: 290a92147d2cb1c45a08f38dbae7fbd6,
+        type: 3}
+    - target: {fileID: 646591375825396753, guid: 948b13ea123acfe48ad4c1ea0c910af6,
+        type: 3}
+      propertyPath: fireBlastObj
+      value: 
+      objectReference: {fileID: 9169941963103599420, guid: 8891b94b0030974479ed14963f6d76e3,
         type: 3}
     - target: {fileID: 646591375825396755, guid: 948b13ea123acfe48ad4c1ea0c910af6,
         type: 3}
@@ -934,7 +945,7 @@ MonoBehaviour:
   - EarthShield
   - RockSlide
   firePowers:
-  - FireBall
+  - FireBlast
   - FireShield
   airPowers:
   - AirBlade
@@ -1643,10 +1654,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2101717357195176540, guid: 290a92147d2cb1c45a08f38dbae7fbd6,
         type: 3}
+    - target: {fileID: 6136460852216839048, guid: d575bef64f7446d4d8e8cdaba03036f3,
+        type: 3}
+      propertyPath: fireBlastObj
+      value: 
+      objectReference: {fileID: 9169941963103599420, guid: 8891b94b0030974479ed14963f6d76e3,
+        type: 3}
     - target: {fileID: 6136460852216839052, guid: d575bef64f7446d4d8e8cdaba03036f3,
         type: 3}
       propertyPath: m_Name
       value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6136460852216839052, guid: d575bef64f7446d4d8e8cdaba03036f3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d575bef64f7446d4d8e8cdaba03036f3, type: 3}

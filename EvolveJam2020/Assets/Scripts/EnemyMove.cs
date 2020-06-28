@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
@@ -65,6 +66,15 @@ public class EnemyMove : MonoBehaviour
         int randPlayer = Random.Range(1, 3);
 
         target = GameManager.instance.GetPlayer(randPlayer).transform;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "attack")
+        {
+            GameManager.instance.enemiesKilled++;
+            Destroy(gameObject);
+        }
     }
 
 }

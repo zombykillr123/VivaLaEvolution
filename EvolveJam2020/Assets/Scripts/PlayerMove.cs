@@ -104,11 +104,18 @@ public class PlayerMove : MonoBehaviour
     private float fireCooldownTime;
 
     [SerializeField]
-    private GameObject fireShieldObj;
+    private GameObject fireShieldObj, fireBlastObj;
 
-    public void FireBall()
+    public void FireBlast()
     {
-        Debug.Log($"{myType} just used FireBall at level {GameManager.instance.fireLevel}");
+        Debug.Log($"{myType} just used FireBlast at level {GameManager.instance.fireLevel}");
+        if (!fireOnCooldown)
+        {
+            fireOnCooldown = true;
+            GameObject clone = Instantiate(fireBlastObj, transform, false);
+            clone.transform.localScale *= 1 + (GameManager.instance.fireLevel * 0.1f);
+            fireCooldownTime = fireCooldownTime = Mathf.Max(0, 30 - (GameManager.instance.fireLevel * 0.25f));
+        }
     }
 
     public void FireShield()
