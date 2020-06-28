@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -146,6 +147,20 @@ public class GameManager : MonoBehaviour
 
     private float currentSpawnDelay;
 
+    public int enemiesKilled;
+
+    public float timeSurvived;
+
+    [HideInInspector]
+    public bool inGame;
+
+    #endregion
+
+    #region UI OBJECTS
+
+    [SerializeField]
+    private TextMeshProUGUI timerText, genomesRemainingText;
+
     #endregion
 
 
@@ -157,6 +172,8 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
 
+        DontDestroyOnLoad(gameObject);
+
         instance = this;        
 
         StartGame();
@@ -165,24 +182,29 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentSpawnDelay > 0)
+        if (inGame)
         {
-            currentSpawnDelay -= Time.deltaTime;
-            if (currentSpawnDelay <= 0)
-            {
-                // Spawn things
-                SpawnStuff();
+            // Keep track of how long you've survived
+            timeSurvived += Time.deltaTime;
+            timerText.text = $"Time Survived: {Mathf.FloorToInt(timeSurvived / 60)}:{Mathf.FloorToInt(timeSurvived % 60).ToString("00")}";
 
-                // Reset it
-                currentSpawnDelay = spawnDelay;
+            if (currentSpawnDelay > 0)
+            {
+                currentSpawnDelay -= Time.deltaTime;
+                if (currentSpawnDelay <= 0)
+                {
+                    // Spawn things
+                    SpawnStuff();
+
+                    // Reset it
+                    currentSpawnDelay = spawnDelay;
+                }
             }
-        }
+        }                
     }
 
     private void SpawnStuff()
     {
-        Debug.Log("Spawning things");
-
         // Pick which spawn points to spawn at
         // First get available spawn points
         List<int> availableSpawns = new List<int>();
@@ -217,6 +239,7 @@ public class GameManager : MonoBehaviour
 
             // Spawn the Genome
             GameObject clone = Instantiate(genomeObject, spawnPoints[spawnID].transform, false);
+            clone.transform.localPosition = Vector2.zero;
             clone.GetComponent<Pickup>().SetUp(newGenomeType, spawnID);
             availableSpawns.Remove(spawnID);
             occupiedSpawns[spawnID] = true;
@@ -253,6 +276,9 @@ public class GameManager : MonoBehaviour
         {
             // Increment destroyed pickups
             destroyedGenomes++;
+
+            // Show how many remaing
+            genomesRemainingText.text = $"Genomes Remaining: {destroyedThreshold - destroyedGenomes}";
 
             // If this number is too high, end the game
             if (destroyedGenomes >= destroyedThreshold)
@@ -380,6 +406,10 @@ public class GameManager : MonoBehaviour
         {
             occupiedSpawns[i] = false;
         }
+
+        inGame = true;
+
+        genomesRemainingText.text = $"Genomes Remaining: {destroyedThreshold - destroyedGenomes}";
     }
 
     /// <summary>
@@ -414,7 +444,8 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         Debug.Log("Game Over");
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        inGame = false;
+        SceneManager.LoadScene(2);
     }
 
     /// <summary>
