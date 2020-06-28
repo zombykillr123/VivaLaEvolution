@@ -41,7 +41,6 @@ public class EnemyMove : MonoBehaviour
     private void TargetNewPickup()
     {
         GameObject[] pickups = GameManager.instance.allPickups;
-        Debug.Log(pickups.Length);
         if (pickups.Length == 0)
         {
             TargetPlayer();
@@ -66,5 +65,14 @@ public class EnemyMove : MonoBehaviour
         int randPlayer = Random.Range(1, 3);
 
         target = GameManager.instance.GetPlayer(randPlayer).transform;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "attack")
+        {
+            GameManager.instance.enemiesKilled++;
+            Destroy(gameObject);
+        }
     }
 }

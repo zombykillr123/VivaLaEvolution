@@ -50,7 +50,15 @@ public class Pickup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (pickingUp)
+        {
+            currentTime -= Time.deltaTime;
+            if (currentTime <= 0)
+            {
+                GameManager.instance.LosePickup(myType, false);
+                Destroy(gameObject);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -62,7 +70,6 @@ public class Pickup : MonoBehaviour
                 currentTime = timerDefault;
                 timerObject.SetActive(true);
                 pickingUp = true;
-                StartCoroutine(TimerToPickup());
                 break;
             case "Enemy":
                 GameManager.instance.LosePickup(myType, true);
@@ -77,24 +84,9 @@ public class Pickup : MonoBehaviour
         {
             // Resest timer stats
             pickingUp = false;
-            StopCoroutine(TimerToPickup());
             timerObject.SetActive(false);
+            currentTime = timerDefault;
         }
-    }
-
-    IEnumerator TimerToPickup()
-    {
-        while (currentTime > 0 && pickingUp)
-        {
-            currentTime -= Time.deltaTime;
-            if (currentTime <= 0)
-            {
-                // When timer is 0, destroy it
-                GameManager.instance.LosePickup(myType, false);
-                Destroy(gameObject);
-            }
-            yield return null;
-        }        
     }
 
     public void SetUp(int typeId, int spawnId)
