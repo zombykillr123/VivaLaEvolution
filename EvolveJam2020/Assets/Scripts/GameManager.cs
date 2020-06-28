@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
     private GameObject[] spawnPoints;
 
     /// <summary>
+    /// Which spawn points are occupied currently
+    /// </summary>
+    public bool[] occupiedSpawns;
+
+    /// <summary>
     /// How many have been destroyed so far
     /// </summary>
     private int destroyedGenomes;
@@ -106,7 +111,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// How fast enemies move (increases as you level up)
     /// </summary>
-    private float enemySpeed = 0.3f;
+    public float enemySpeed = 0.3f;
 
     /// <summary>
     /// The maximum speed an enemy can move
@@ -163,7 +168,7 @@ public class GameManager : MonoBehaviour
         if (currentSpawnDelay > 0)
         {
             currentSpawnDelay -= Time.deltaTime;
-            if (currentSpawnDelay < spawnDelay)
+            if (currentSpawnDelay <= 0)
             {
                 // Spawn things
                 SpawnStuff();
@@ -176,23 +181,60 @@ public class GameManager : MonoBehaviour
 
     private void SpawnStuff()
     {
-        // Pick how many genomes to spawn
-        int howManyGenomes = Random.Range(0, (int)maxGenomeSpawn);
-
-        // Pick how many enemies to spawn
-        int howManyEnemies = Random.Range(0, howManyGenomes);
+        Debug.Log("Spawning things");
 
         // Pick which spawn points to spawn at
+        // First get available spawn points
+        List<int> availableSpawns = new List<int>();
+        for (int i = 0; i < occupiedSpawns.Length; i++)
+        {
+            if (occupiedSpawns[i] == false)
+            {
+                availableSpawns.Add(i);
+            }
+        }
 
-        // For each genome
+        // Pick how many genomes to spawn
+        int howManyGenomes = Random.Range(1, (int)maxGenomeSpawn);
 
-        // Pick which type it is
+        howManyGenomes = Mathf.Clamp(howManyGenomes, 1, availableSpawns.Count);
 
-        // Spawn the Genome
+        // Pick how many enemies to spawn
+        int howManyEnemies = Random.Range(0, howManyGenomes+1);
+
+        howManyEnemies = Mathf.Clamp(howManyEnemies, 0, availableSpawns.Count - howManyGenomes);
+
+        Debug.Log($"Spawning Info: {howManyEnemies} Enemies, {howManyGenomes} Genomes and {availableSpawns.Count} spawn points");
+
+        // For each genome being spawned
+        for (int i = 0; i < howManyGenomes; i++)
+        {
+            // Pick which type it is
+            int newGenomeType = Random.Range(0, 4);
+
+            // Pick a random available spawn
+            int spawnID = availableSpawns[Random.Range(0, availableSpawns.Count)];
+
+            // Spawn the Genome
+            GameObject clone = Instantiate(genomeObject, spawnPoints[spawnID].transform, false);
+            clone.GetComponent<Pickup>().SetUp(newGenomeType, spawnID);
+            availableSpawns.Remove(spawnID);
+            occupiedSpawns[spawnID] = true;
+        }
 
         // For each enemy
+        for (int i = 0; i < howManyEnemies; i++)
+        {
+            // Pick a random available spawn
+            int spawnID = availableSpawns[Random.Range(0, availableSpawns.Count)];
 
-        // Spawn the enemy
+            // Spawn the Genome
+            Instantiate(enemyObject, spawnPoints[spawnID].transform, false);            
+            availableSpawns.Remove(spawnID);
+        }
+
+        // Reset the spawn counter
+        currentSpawnDelay = spawnDelay;
     }
 
     /// <summary>
@@ -331,6 +373,13 @@ public class GameManager : MonoBehaviour
 
         // Initialize the spawn delay
         currentSpawnDelay = spawnDelay;
+
+        occupiedSpawns = new bool[8];
+
+        for(int i = 0; i < occupiedSpawns.Length; i++)
+        {
+            occupiedSpawns[i] = false;
+        }
     }
 
     /// <summary>
@@ -359,12 +408,20 @@ public class GameManager : MonoBehaviour
         return randPower;
     }
 
+    /// <summary>
+    /// End the game, when a player hits a zombie or loses too many genomes
+    /// </summary>
     public void EndGame()
     {
         Debug.Log("Game Over");
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    /// <summary>
+    /// Return a player type
+    /// </summary>
+    /// <param name="number">Player number (1 for p1)</param>
+    /// <returns>Player name</returns>
     public GameObject GetPlayer(int number)
     {
         if (number == 1)

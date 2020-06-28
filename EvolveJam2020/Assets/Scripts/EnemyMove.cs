@@ -8,7 +8,6 @@ public class EnemyMove : MonoBehaviour
     [SerializeField]
     private Transform target;
 
-    [SerializeField]
     private float speed;
 
     private SpriteRenderer mySP;
@@ -18,6 +17,8 @@ public class EnemyMove : MonoBehaviour
     void Start()
     {        
         mySP = GetComponent<SpriteRenderer>();
+
+        speed = GameManager.instance.enemySpeed;
 
         TargetNewPickup();
     }
@@ -40,14 +41,30 @@ public class EnemyMove : MonoBehaviour
     private void TargetNewPickup()
     {
         GameObject[] pickups = GameManager.instance.allPickups;
+        Debug.Log(pickups.Length);
         if (pickups.Length == 0)
         {
-            // Pick a player instead
-            int randPlayer = Random.Range(1, 3);
-
-            target = GameManager.instance.GetPlayer(randPlayer).transform;            
+            TargetPlayer();
         }
-        int randPickup = Random.Range(0, pickups.Length);
-        target = pickups[randPickup].transform;
+        else
+        {
+            int randPickup = Random.Range(0, pickups.Length);
+            if (pickups[randPickup] == null)
+            {
+                TargetPlayer();
+            }
+            else
+            {
+                target = pickups[randPickup].transform;
+            }
+        }
+    }
+
+    private void TargetPlayer()
+    {
+        // Pick a player instead
+        int randPlayer = Random.Range(1, 3);
+
+        target = GameManager.instance.GetPlayer(randPlayer).transform;
     }
 }

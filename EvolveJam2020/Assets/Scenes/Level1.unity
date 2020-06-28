@@ -203,6 +203,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LittleGuy
       objectReference: {fileID: 0}
+    - target: {fileID: 2012563746358140461, guid: c149eebe18f9b2248a842eef15ac382a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c149eebe18f9b2248a842eef15ac382a, type: 3}
 --- !u!1 &82390916
@@ -390,6 +395,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LittleGuy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012563746358140461, guid: c149eebe18f9b2248a842eef15ac382a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3896226715542866048, guid: c149eebe18f9b2248a842eef15ac382a,
         type: 3}
@@ -902,7 +912,7 @@ PrefabInstance:
     - target: {fileID: 4773926497883110771, guid: c61e9940f113ef445b9d50b8b27bb32b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c61e9940f113ef445b9d50b8b27bb32b, type: 3}
@@ -987,8 +997,11 @@ MonoBehaviour:
   - {fileID: 356255938}
   - {fileID: 797363360}
   - {fileID: 82390916}
-  genomeObject: {fileID: 0}
-  enemyObject: {fileID: 0}
+  occupiedSpawns: 
+  genomeObject: {fileID: 2012563746358140461, guid: c149eebe18f9b2248a842eef15ac382a,
+    type: 3}
+  enemyObject: {fileID: 4773926497883110771, guid: c61e9940f113ef445b9d50b8b27bb32b,
+    type: 3}
   allPickups: []
   waterPowers:
   - WaterWhip
@@ -1101,6 +1114,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LittleGuy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012563746358140461, guid: c149eebe18f9b2248a842eef15ac382a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3896226715542866048, guid: c149eebe18f9b2248a842eef15ac382a,
         type: 3}
@@ -1377,6 +1395,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LittleGuy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012563746358140461, guid: c149eebe18f9b2248a842eef15ac382a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c149eebe18f9b2248a842eef15ac382a, type: 3}

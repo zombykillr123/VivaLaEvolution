@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class Pickup : MonoBehaviour
     private Animator myClockAnim; 
 
     [SerializeField]
-    private int myType; // not using enums right now, can do it later
+    private int myType;
 
     [Header("Time in seconds it takes to pick this up")]
     [SerializeField]
@@ -21,9 +22,15 @@ public class Pickup : MonoBehaviour
     private GameObject timerObject;
 
     /// <summary>
+    /// Which spawn point it spawned at
+    /// </summary>
+    private int spawnPoint;
+
+    /// <summary>
     /// Are we getting picked up currently?
     /// </summary>
     private bool pickingUp; 
+
 
     // Start is called before the first frame update
     void Start()
@@ -90,8 +97,14 @@ public class Pickup : MonoBehaviour
         }        
     }
 
-    public void SetInt(int id)
+    public void SetUp(int typeId, int spawnId)
     {
-        myType = id;
+        myType = typeId;
+        spawnPoint = spawnId;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.occupiedSpawns[spawnPoint] = false;
     }
 }

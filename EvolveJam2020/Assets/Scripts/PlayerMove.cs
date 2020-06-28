@@ -40,18 +40,6 @@ public class PlayerMove : MonoBehaviour
         controls.Player1.Enable();
         controls.Player2.Enable();
 
-        /*
-        controls.Player1.Ability1.performed += ctx => UseAbility(1);
-        controls.Player1.Ability2.performed += ctx => UseAbility(2);
-        controls.Player1.Ability3.performed += ctx => UseAbility(3);
-        controls.Player1.Ability4.performed += ctx => UseAbility(4);
-
-        controls.Player2.Ability1.performed += ctx => UseAbility(1);
-        controls.Player2.Ability2.performed += ctx => UseAbility(2);
-        controls.Player2.Ability3.performed += ctx => UseAbility(3);
-        controls.Player2.Ability4.performed += ctx => UseAbility(4);
-        */
-
         if (myType == PlayerType.Player1)
         {
             MethodInfo a1Func = GetType().GetMethod(a1);
