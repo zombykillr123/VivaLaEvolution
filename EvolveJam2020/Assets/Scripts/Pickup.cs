@@ -40,7 +40,7 @@ public class Pickup : MonoBehaviour
         timerObject = transform.GetChild(0).gameObject;
         timerObject.SetActive(false);
 
-        GetComponent<Animator>().runtimeAnimatorController = GameManager.instance.pickupAnimations[myType];
+        //GetComponent<Animator>().runtimeAnimatorController = GameManager.instance.pickupAnimations[myType];
 
         myClockAnim = timerObject.GetComponent<Animator>();
 

@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
+using UnityEngine.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-
     #region GENERAL VARIABLES
 
     public static GameManager instance = null;
@@ -16,8 +15,11 @@ public class GameManager : MonoBehaviour
     /// Pickups reference this to get color
     /// </summary>
     public Sprite[] pickupSprites;
-    
-    public AnimatorController[] pickupAnimations;
+
+    //public RuntimeAnimatorController[] pickupAnimations;
+
+    [SerializeField]
+    private GameObject[] allGenomes;
 
     [SerializeField]
     private PlayerMove p1Script, p2Script;
@@ -266,7 +268,7 @@ public class GameManager : MonoBehaviour
             int spawnID = availableSpawns[Random.Range(0, availableSpawns.Count)];
 
             // Spawn the Genome
-            GameObject clone = Instantiate(genomeObject, spawnPoints[spawnID].transform, false);
+            GameObject clone = Instantiate(allGenomes[newGenomeType], spawnPoints[spawnID].transform, false);
             clone.transform.localPosition = Vector2.zero;
             clone.GetComponent<Pickup>().SetUp(newGenomeType, spawnID);
             availableSpawns.Remove(spawnID);
